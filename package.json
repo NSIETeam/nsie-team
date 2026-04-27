@@ -1,7 +1,7 @@
 {
-  "name": "nsie-vue",
+  "name": "nsie-team",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "vue": "^3.5.32",
-    "vue-router": "^5.0.6"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.6",
-    "vite": "^8.0.10"
+    "@vitejs/plugin-vue": "^5.2.0",
+    "vite": "^6.3.0"
   }
 }
