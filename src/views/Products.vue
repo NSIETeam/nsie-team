@@ -6,13 +6,13 @@ defineProps({ lang: String })
 
 const builtinProducts = [
   { id: 'bp-1', name_zh: '简易计算器', name_en: 'Simple Calculator', desc_zh: '一个轻量级四则运算工具', desc_en: 'A lightweight arithmetic tool',
-    type: 'tool', status: 'online', icon: '🧮', downloads: 0 },
+    type: 'tool', status: 'online', icon: '', downloads: 0 },
   { id: 'bp-2', name_zh: '单位换算器', name_en: 'Unit Converter', desc_zh: '长度、重量、温度等多单位互换', desc_en: 'Length, weight, temperature converter',
-    type: 'tool', status: 'online', icon: '📏', downloads: 0 },
+    type: 'tool', status: 'online', icon: '', downloads: 0 },
   { id: 'bp-3', name_zh: '贪吃蛇小游戏', name_en: 'Snake Game', desc_zh: '经典贪吃蛇，键盘/触屏双支持', desc_en: 'Classic snake game with keyboard & touch',
-    type: 'game', status: 'beta', icon: '🐍', downloads: 0 },
+    type: 'game', status: 'beta', icon: '', downloads: 0 },
   { id: 'bp-4', name_zh: 'JSON 格式化工具', name_en: 'JSON Formatter', desc_zh: '美化与校验 JSON 数据', desc_en: 'Pretty-print and validate JSON',
-    type: 'tool', status: 'coming', icon: '📋', downloads: 0 },
+    type: 'tool', status: 'coming', icon: '', downloads: 0 },
 ]
 
 const userProducts = ref(getAllProducts())
@@ -47,7 +47,7 @@ function submitProd() {
     desc_en: f.desc || 'User submitted project',
     type: f.type,
     status: 'beta',
-    icon: '🚀',
+    icon: '',
     file: f.file || null,
     fileName: f.fileName || '',
   })
@@ -97,8 +97,8 @@ function downloadProduct(p) {
       <strong>{{ lang==='zh'?'待审核产品':'Pending Products' }}:</strong>
       <span v-for="p in pendingProducts" :key="p.id" style="display:inline-flex;align-items:center;gap:0.4rem;margin-left:0.5rem;flex-wrap:wrap">
         {{ p.name_zh }}
-        <button class="btn btn-sm btn-primary" @click="handleApprove(p.id)" style="padding:0.15rem 0.45rem;font-size:0.72rem">✓ {{ lang==='zh'?'通过':'Approve' }}</button>
-        <button class="btn btn-sm" style="padding:0.15rem 0.45rem;font-size:0.72rem;background:transparent;border:1px solid #ccc;color:#999;cursor:pointer" @click="handleReject(p.id)">✕ {{ lang==='zh'?'拒绝':'Reject' }}</button>
+        <button class="btn btn-sm btn-primary" @click="handleApprove(p.id)" style="padding:0.15rem 0.45rem;font-size:0.72rem"> {{ lang==='zh'?'通过':'Approve' }}</button>
+        <button class="btn btn-sm" style="padding:0.15rem 0.45rem;font-size:0.72rem;background:transparent;border:1px solid #ccc;color:#999;cursor:pointer" @click="handleReject(p.id)"> {{ lang==='zh'?'拒绝':'Reject' }}</button>
       </span>
     </div>
 
@@ -120,7 +120,7 @@ function downloadProduct(p) {
         <label style="font-size:0.85rem;color:var(--text2)">{{ lang==='zh'?'上传安装包（可选，≤5MB）：':'Upload package (optional, ≤5MB):' }}</label>
         <input type="file" @change="handleFileUpload" style="display:block;margin-top:0.3rem;font-size:0.85rem" />
       </div>
-      <div v-if="submitForm.fileName" style="font-size:0.8rem;color:var(--accent);margin-bottom:0.5rem">📎 {{ submitForm.fileName }}</div>
+      <div v-if="submitForm.fileName" style="font-size:0.8rem;color:var(--accent);margin-bottom:0.5rem"> {{ submitForm.fileName }}</div>
       <div style="display:flex;gap:0.5rem;justify-content:flex-end">
         <select v-model="submitForm.type" style="padding:0.45rem 0.6rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;font-family:inherit">
           <option value="tool">{{ lang==='zh'?'工具':'Tool' }}</option>
@@ -137,12 +137,12 @@ function downloadProduct(p) {
         <h3>{{ lang==='zh'?p.name_zh:p.name_en }}</h3>
         <p class="desc">{{ lang==='zh'?p.desc_zh:p.desc_en }}</p>
         <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem">
-          <span v-if="p.status==='online'" style="font-size:0.75rem;padding:0.1rem 0.45rem;border-radius:100px;background:#e6f7e6;color:#389e0d">✅ {{ statusLabel(p.status) }}</span>
-          <span v-else style="font-size:0.75rem;padding:0.1rem 0.45rem;border-radius:100px;background:var(--accent-light);color:var(--accent)">🔄 {{ statusLabel(p.status) }}</span>
-          <span v-if="p.fileName" style="font-size:0.72rem;color:var(--text3)">📦 {{ p.fileName }}</span>
+          <span v-if="p.status==='online'" style="font-size:0.75rem;padding:0.1rem 0.45rem;border-radius:100px;background:#e6f7e6;color:#389e0d"> {{ statusLabel(p.status) }}</span>
+          <span v-else style="font-size:0.75rem;padding:0.1rem 0.45rem;border-radius:100px;background:var(--accent-light);color:var(--accent)"> {{ statusLabel(p.status) }}</span>
+          <span v-if="p.fileName" style="font-size:0.72rem;color:var(--text3)"> {{ p.fileName }}</span>
         </div>
         <div style="display:flex;gap:0.4rem">
-          <button v-if="p.file" class="btn btn-sm btn-primary" @click="downloadProduct(p)">📥 {{ lang==='zh'?'下载':'Download' }}</button>
+          <button v-if="p.file" class="btn btn-sm btn-primary" @click="downloadProduct(p)"> {{ lang==='zh'?'下载':'Download' }}</button>
           <button v-if="p.status === 'online' && !p.file" class="btn btn-sm btn-outline">{{ lang==='zh'?'在线使用':'Try Online' }}</button>
         </div>
       </div>

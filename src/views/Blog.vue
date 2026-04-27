@@ -80,10 +80,12 @@ function submitBlog() {
 
 function openPost(post) {
   selectedPost.value = post
+  document.body.style.overflow = 'hidden'
 }
 
 function closePost() {
   selectedPost.value = null
+  document.body.style.overflow = ''
   commentForm.value = { author: '', content: '' }
 }
 
@@ -117,7 +119,7 @@ function handleReject(id) {
 
 // Cat icon
 function catIcon(c) {
-  return c === '前端' ? '💻' : c === 'AI' ? '🤖' : c === '学习' ? '📖' : '🛠'
+  return c === '前端' ? '' : c === 'AI' ? '' : c === '学习' ? '' : ''
 }
 </script>
 <template>
@@ -127,8 +129,8 @@ function catIcon(c) {
       <strong>{{ lang==='zh'?'待审核':'Pending Review' }}:</strong>
       <span v-for="p in pendingPosts" :key="p.id" style="display:inline-flex;align-items:center;gap:0.4rem;margin-left:0.5rem">
         {{ p.title_zh }}
-        <button class="btn btn-sm btn-primary" @click="handleApprove(p.id)" style="padding:0.15rem 0.45rem;font-size:0.72rem">✓</button>
-        <button class="btn btn-sm" style="padding:0.15rem 0.45rem;font-size:0.72rem;background:transparent;border:1px solid #ccc;color:#999;cursor:pointer" @click="handleReject(p.id)">✕</button>
+        <button class="btn btn-sm btn-primary" @click="handleApprove(p.id)" style="padding:0.15rem 0.45rem;font-size:0.72rem"></button>
+        <button class="btn btn-sm" style="padding:0.15rem 0.45rem;font-size:0.72rem;background:transparent;border:1px solid #ccc;color:#999;cursor:pointer" @click="handleReject(p.id)"></button>
       </span>
     </div>
 
@@ -178,8 +180,8 @@ function catIcon(c) {
         <div class="meta">
           <span class="author">{{ p.author || 'NSIE Team' }}</span>
           <span>{{ formatDate(p.date || p.submittedAt) }}</span>
-          <span>💬 {{ getComments(p.id).length }}</span>
-          <span>👍 {{ p.likes || 0 }}</span>
+          <span> {{ getComments(p.id).length }}</span>
+          <span> {{ p.likes || 0 }}</span>
         </div>
       </div>
     </div>
@@ -189,7 +191,7 @@ function catIcon(c) {
       <div style="background:#fff;border-radius:8px;max-width:700px;width:100%;max-height:85vh;overflow-y:auto;padding:1.5rem 2rem">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
           <h2 style="margin:0;flex:1">{{ lang==='zh'?selectedPost.title_zh:selectedPost.title_en }}</h2>
-          <button @click="closePost" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text3)">✕</button>
+          <button @click="closePost" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text3)"></button>
         </div>
         <div class="meta" style="margin-bottom:1rem">
           <span class="author">{{ selectedPost.author }}</span>
